@@ -1,11 +1,9 @@
-import React from 'react'
+import { configureStore } from "@reduxjs/toolkit";
+import userSlice from "../slices/userSlice";
 
-const ReduxStore = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-export default ReduxStore
+const store = configureStore({
+  reducer: {
+    userSlice: userSlice,
+  },
+});
+export default store;
