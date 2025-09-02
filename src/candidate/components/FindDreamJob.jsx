@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import womensImage from ".././assets/GetHire.jpg";
+import womensImage from "../../assets/GetHire.jpg";
 import { Typography, Button, Grid, Box } from "@mui/material";
 import Navbar from "./NavBar";
-import JobCardsSection from "./JobCardSection";
 import JobSearchBox from "./JobSearchBox";
-import useMobileView from "../utilities/customHooks/useMobileView";
+import useMobileView from "../../utilities/customHooks/useMobileView";
 import JobFeed from "./JobFeed";
 
 const FindDreamJob = () => {
