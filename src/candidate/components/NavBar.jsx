@@ -17,9 +17,12 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import useMobileView from "../utilities/customHooks/useMobileView";
+import useMobileView from "../../utilities/customHooks/useMobileView";
 import { useDispatch, useSelector } from "react-redux";
-import { setModalOpen, setRegisterModalOpen } from "../redux/slices/userSlice";
+import {
+  setModalOpen,
+  setRegisterModalOpen,
+} from "../../redux/slices/userSlice";
 
 const Navbar = () => {
   const isMobile = useMobileView();

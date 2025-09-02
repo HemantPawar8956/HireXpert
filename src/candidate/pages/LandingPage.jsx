@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Box, Typography, Button } from "@mui/material";
-import logo from ".././assets/HireXpert Logo.png"; // Place logo here
+import logo from "../../assets/HireXpert Logo.png"; // Place logo here
 import { NavLink } from "react-router-dom";
 
 const LandingPage = () => {

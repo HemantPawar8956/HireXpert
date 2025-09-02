@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./../Layout";
-import LandingPage from "../pages/LandingPage";
-import FindDreamJob from "../components/FindDreamJob";
-import RecruiterRegistration from "./../components/recruiter/RecruiterRegisteration";
+import LandingPage from "./../candidate/pages/LandingPage";
+import FindDreamJob from "./../candidate/components/FindDreamJob";
+import LoginPage from "./../candidate/pages/LoginPage";
+import RecruiterRegisteration from "../recruiter/RecruiterRegisteration";
+
 const HireXpertRoutes = createBrowserRouter([
   {
     path: "/",
@@ -19,7 +21,11 @@ const HireXpertRoutes = createBrowserRouter([
       },
       {
         path: "/recruiters/register",
-        element: <RecruiterRegistration />,
+        element: <RecruiterRegisteration />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
       },
     ],
   },

@@ -10,12 +10,12 @@ import {
   IconButton,
   Divider,
 } from "@mui/material";
-import registerImage from "../assets/RegisterPageImage.webp"; // Ensure you have an image at this path
+import registerImage from "../../assets/RegisterPageImage.webp"; // Ensure you have an image at this path
 import CloseIcon from "@mui/icons-material/Close";
 import { FaUserPlus, FaBriefcase } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { setRegisterModalOpen } from "../redux/slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { setRegisterModalOpen } from "../../redux/slices/userSlice";
 
 const RegisterModal = ({ open }) => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const RegisterModal = ({ open }) => {
           alignItems: "center",
           pb: 0,
         }}>
-        <Typography variant="h5" fontWeight="bold">
+        <Typography variant="p" fontWeight="bold">
           Join HireXPERT
         </Typography>
         <IconButton onClick={handleClose}>
@@ -82,26 +82,28 @@ const RegisterModal = ({ open }) => {
             Register as Candidate
           </Button>
 
-          <Button
-            variant="outlined"
-            startIcon={<FaBriefcase size={20} />}
-            fullWidth
-            sx={{
-              fontWeight: "bold",
-              borderRadius: 2,
-              py: 1.5,
-              textTransform: "none",
-              borderColor: "#2e7d32",
-              color: "#2e7d32",
-              "&:hover": {
-                backgroundColor: "#e8f5e9",
-              },
-            }}
-            onClick={() => {
-              handleClose(), navigate("/recruiters/register");
-            }}>
-            Register as Recruiter
-          </Button>
+          <Link to={"/recruiters/register"}>
+            <Button
+              variant="outlined"
+              startIcon={<FaBriefcase size={20} />}
+              fullWidth
+              sx={{
+                fontWeight: "bold",
+                borderRadius: 2,
+                py: 1.5,
+                textTransform: "none",
+                borderColor: "#2e7d32",
+                color: "#2e7d32",
+                "&:hover": {
+                  backgroundColor: "#e8f5e9",
+                },
+              }}
+              onClick={() => {
+                handleClose(), navigate("/recruiters/register");
+              }}>
+              Register as Recruiter
+            </Button>
+          </Link>
         </Stack>
 
         <Divider sx={{ my: 4 }} />

@@ -14,7 +14,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { FaUserTie, FaUsers } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { setModalOpen } from "../redux/slices/userSlice";
+import { setModalOpen } from "../../redux/slices/userSlice";
 
 const LoginModal = ({ open }) => {
   const dispatch = useDispatch();
