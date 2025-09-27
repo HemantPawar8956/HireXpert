@@ -6,7 +6,7 @@ import RegisterModal from './candidate/components/RegisterModel';
 const Layout = () => {
   const userSlice = useSelector((state) => state.userSlice);
   return (
-    <section>
+    <section className="layout">
       <LoginModal open={userSlice.isLoginModelOpen} />
       <RegisterModal open={userSlice.isRegisterModelOpen} />
       <Outlet />

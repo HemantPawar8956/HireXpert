@@ -14,6 +14,7 @@ const LandingPage = () => {
     <Box
       sx={{
         minHeight: "100vh",
+        minWidth: "100%",
         background: "var(--background-color)", // Use CSS variable here
         display: "flex",
         flexDirection: "column",
