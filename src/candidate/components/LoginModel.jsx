@@ -15,8 +15,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import { FaUserTie, FaUsers } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { setModalOpen } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const LoginModal = ({ open }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleClose = () => dispatch(setModalOpen(false));
 
@@ -75,7 +77,10 @@ const LoginModal = ({ open }) => {
                 backgroundColor: "#125ea3",
               },
             }}
-            onClick={() => alert("Login as Candidate clicked")}>
+            onClick={() => {
+              navigate("/login");
+              handleClose();
+            }}>
             Login as Candidate
           </Button>
 

@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./../Layout";
 import LandingPage from "./../candidate/pages/LandingPage";
 import FindDreamJob from "./../candidate/components/FindDreamJob";
-import LoginPage from "./../candidate/pages/LoginPage";
 import RecruiterRegisteration from "../recruiter/RecruiterRegisteration";
+import CandidateLogin from "./../candidate/pages/CandidateLoginPage";
 
 const HireXpertRoutes = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const HireXpertRoutes = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <LoginPage />,
+        element: <CandidateLogin />,
       },
     ],
   },
