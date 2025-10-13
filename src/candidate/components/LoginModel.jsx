@@ -8,7 +8,6 @@ import {
   Box,
   Stack,
   IconButton,
-  Avatar,
   Divider,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -29,50 +28,52 @@ const LoginModal = ({ open }) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          pb: 0,
+          pb: 2,
         }}>
-        <Typography variant="h5" fontWeight="bold">
+        <Typography variant="p" fontWeight="bold" fontSize="1rem">
           Welcome to HireXPERT
         </Typography>
         <IconButton onClick={handleClose}>
-          <CloseIcon />
+          <CloseIcon fontSize="small" />
         </IconButton>
       </DialogTitle>
 
       <DialogContent>
         <Typography
-          variant="subtitle1"
+          variant="subtitle2"
           align="center"
           fontWeight={600}
           color="text.secondary"
           mt={1}
-          mb={3}>
+          mb={2}
+          fontSize="0.75rem">
           Select how you want to log in
         </Typography>
 
-        {/* Illustration or logo (Optional) */}
-        <Box textAlign="center" mb={3}>
+        {/* Illustration */}
+        <Box textAlign="center" mb={2}>
           <img
             src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
             alt="login"
-            width={100}
-            height={100}
+            width={80}
+            height={80}
             style={{ borderRadius: "50%" }}
           />
         </Box>
 
-        <Stack spacing={2}>
+        <Stack spacing={1.5}>
           <Button
             variant="contained"
-            startIcon={<FaUsers size={20} />}
+            startIcon={<FaUsers size={16} />}
             fullWidth
             sx={{
               backgroundColor: "#1976d2",
               color: "white",
               fontWeight: "bold",
               borderRadius: 2,
-              py: 1.5,
+              py: 1.1,
               textTransform: "none",
+              fontSize: "0.7rem",
               "&:hover": {
                 backgroundColor: "#125ea3",
               },
@@ -86,13 +87,14 @@ const LoginModal = ({ open }) => {
 
           <Button
             variant="outlined"
-            startIcon={<FaUserTie size={20} />}
+            startIcon={<FaUserTie size={16} />}
             fullWidth
             sx={{
               fontWeight: "bold",
               borderRadius: 2,
-              py: 1.5,
+              py: 1.1,
               textTransform: "none",
+              fontSize: "0.7rem",
               borderColor: "#1976d2",
               color: "#1976d2",
               "&:hover": {
@@ -104,13 +106,14 @@ const LoginModal = ({ open }) => {
           </Button>
         </Stack>
 
-        <Divider sx={{ my: 4 }} />
+        <Divider sx={{ my: 2.5 }} />
 
         <Typography
-          variant="subtitle1"
+          variant="body2"
           color="text.primary"
           align="center"
-          display="block">
+          display="block"
+          fontSize="0.75rem">
           By continuing, you agree to our Terms and Privacy Policy.
         </Typography>
       </DialogContent>

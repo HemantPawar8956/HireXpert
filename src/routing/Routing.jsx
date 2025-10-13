@@ -4,6 +4,8 @@ import LandingPage from "./../candidate/pages/LandingPage";
 import FindDreamJob from "./../candidate/components/FindDreamJob";
 import RecruiterRegisteration from "../recruiter/RecruiterRegisteration";
 import CandidateLogin from "./../candidate/pages/CandidateLoginPage";
+import PageNotFound from "../candidate/components/PageNotFound";
+import CandidatesPrivateRoute from "../auth/CandidatesPrivateRoute";
 
 const HireXpertRoutes = createBrowserRouter([
   {
@@ -16,8 +18,16 @@ const HireXpertRoutes = createBrowserRouter([
         element: <LandingPage />,
       },
       {
-        path: "/findDreamJOb",
+        path: "/findDreamJob",
         element: <FindDreamJob />,
+      },
+      {
+        path: "/candidates/CandidatesDashBoard",
+        element: (
+          <CandidatesPrivateRoute>
+            <FindDreamJob />
+          </CandidatesPrivateRoute>
+        ),
       },
       {
         path: "/recruiters/register",
@@ -26,6 +36,10 @@ const HireXpertRoutes = createBrowserRouter([
       {
         path: "/login",
         element: <CandidateLogin />,
+      },
+      {
+        path: "*",
+        element: <PageNotFound />,
       },
     ],
   },
