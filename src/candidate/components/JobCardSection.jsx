@@ -3,7 +3,7 @@ import { Box, Typography, Grid, Paper } from "@mui/material";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// Icons
+// Icons (you can customize or download your own)
 import {
   FaCode,
   FaUserTie,
@@ -15,32 +15,32 @@ import {
 const jobCards = [
   {
     title: "Full Stack Developer",
-    icon: <FaCode size={38} />, // decreased by 2px (~0.2rem)
+    icon: <FaCode size={40} />,
     color: "#fca61f",
   },
   {
     title: "Technical Lead",
-    icon: <FaUsersCog size={38} />,
+    icon: <FaUsersCog size={40} />,
     color: "#3cb371",
   },
   {
     title: "HR Manager",
-    icon: <FaUserTie size={38} />,
+    icon: <FaUserTie size={40} />,
     color: "#5e72e4",
   },
   {
     title: "HR Manager",
-    icon: <FaUserTie size={38} />,
+    icon: <FaUserTie size={40} />,
     color: "#5e72e4",
   },
   {
     title: "Content Writer",
-    icon: <FaPenFancy size={38} />,
+    icon: <FaPenFancy size={40} />,
     color: "#fca61f",
   },
   {
     title: "Business Analyst",
-    icon: <FaChartBar size={38} />,
+    icon: <FaChartBar size={40} />,
     color: "#fca61f",
   },
 ];
@@ -60,7 +60,7 @@ const JobCardsSection = () => {
         backgroundColor: "transparent",
       }}>
       <Typography
-        variant="h5" // reduced from h4 (~0.2rem smaller)
+        variant="h4"
         fontWeight="bold"
         textAlign="center"
         mb={4}
@@ -84,7 +84,7 @@ const JobCardsSection = () => {
                 border: `2px solid ${job.color}40`,
                 borderRadius: 4,
                 textAlign: "center",
-                p: 3.8, // slightly reduced padding
+                p: 4,
                 transition: "transform 0.3s",
                 "&:hover": {
                   transform: "translateY(-5px)",
@@ -92,8 +92,14 @@ const JobCardsSection = () => {
                   cursor: "pointer",
                 },
               }}>
-              <Box sx={{ color: job.color, mb: 1.8 }}>{job.icon}</Box>
-              <Typography fontWeight="500" fontSize="0.9rem">
+              <Box
+                sx={{
+                  color: job.color,
+                  mb: 2,
+                }}>
+                {job.icon}
+              </Box>
+              <Typography fontWeight="500" fontSize={16}>
                 {job.title}
               </Typography>
             </Paper>

@@ -7,7 +7,6 @@ import Navbar from "./NavBar";
 import JobSearchBox from "./JobSearchBox";
 import useMobileView from "../../utilities/customHooks/useMobileView";
 import JobFeed from "./JobFeed";
-import JobCardsSection from "./JobCardSection";
 
 const FindDreamJob = () => {
   const isMobile = useMobileView();
@@ -35,23 +34,22 @@ const FindDreamJob = () => {
         }}>
         <Box textAlign="center" mb={4} data-aos="fade-down">
           {isMobile ? (
-            <Typography variant="h5" fontWeight="bold">
+            <Typography variant="h4" fontWeight="bold">
               Find your dream job
             </Typography>
           ) : (
-            <Typography variant="h4" fontWeight="bold">
+            <Typography variant="h3" fontWeight="bold">
               Find your dream job
             </Typography>
           )}
 
-          <Typography variant="subtitle1" mt={2} fontSize={"0.8rem"}>
+          <Typography variant="subtitle1" mt={2} fontSize={"1rem"}>
             ✅ One application, hundreds of companies
           </Typography>
-          <Typography variant="subtitle1" fontSize={"1rem"}>
+          <Typography variant="subtitle1" fontSize={"1.2rem"}>
             ✅ Get discovered directly by recruiters even
           </Typography>
         </Box>
-
         {/* Job Search Box */}
         <JobSearchBox />
 
@@ -65,6 +63,7 @@ const FindDreamJob = () => {
           sx={{
             backgroundColor: "#5C45E3",
             background: "#007ee5",
+
             borderRadius: "16px",
             py: 2,
             px: 3,
@@ -73,7 +72,7 @@ const FindDreamJob = () => {
           }}
           data-aos="fade-up">
           <Grid item xs={12} md={6}>
-            <Typography variant="h5" color="white" fontWeight="bold" mb={3}>
+            <Typography variant="h4" color="white" fontWeight="bold" mb={4}>
               Get noticed instantly
             </Typography>
             <Button
@@ -84,9 +83,9 @@ const FindDreamJob = () => {
                 textTransform: "none",
                 fontWeight: 500,
                 borderRadius: "8px",
-                fontSize: "0.8rem",
-                px: 2.5,
-                py: 0.8,
+                fontSize: "1rem",
+                px: 3,
+                py: 1,
                 "&:hover": {
                   backgroundColor: "#f0f0f0",
                 },
@@ -98,11 +97,11 @@ const FindDreamJob = () => {
           <Grid item xs={12} md={6} textAlign="center" data-aos="fade-left">
             <Box
               component="img"
-              src={womensImage}
+              src={womensImage} // <- place your image in public folder as `public/woman.png`
               alt="Woman"
               sx={{
                 width: "100%",
-                maxWidth: "360px",
+                maxWidth: "380px",
                 borderRadius: "0 16px 16px 0",
                 mixBlendMode: "multiply",
                 mt: { xs: 3, md: 0 },
@@ -110,9 +109,9 @@ const FindDreamJob = () => {
             />
           </Grid>
         </Grid>
+        {/* <JobCardsSection /> */}
+        <JobFeed />
       </Box>
-      <JobFeed />
-      <JobCardsSection />
     </>
   );
 };
