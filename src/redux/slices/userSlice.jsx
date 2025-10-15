@@ -48,6 +48,7 @@ const userSlice = createSlice({
       state.isLoginModelOpen = action.payload;
     },
     setRegisterModalOpen(state, action) {
+      console.log(action.payload);
       state.isRegisterModelOpen = action.payload;
     },
     setUserData(state, action) {

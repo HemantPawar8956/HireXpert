@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import LoginModal from "./candidate/components/LoginModel";
@@ -6,6 +7,8 @@ import RegisterModal from "./candidate/components/RegisterModel";
 import HireXpertLoader from "./utilities/HireXpertLoader";
 import { useEffect } from "react";
 import { logout, setUserPreferences } from "./redux/slices/userSlice";
+
+import { useSelector } from "react-redux";
 
 const Layout = () => {
   const dispatch = useDispatch();
@@ -28,7 +31,9 @@ const Layout = () => {
 
   return (
     <section className="layout">
+
       {userSlice?.isLoading && <HireXpertLoader />}
+
       <LoginModal open={userSlice.isLoginModelOpen} />
       <RegisterModal open={userSlice.isRegisterModelOpen} />
       <Outlet />

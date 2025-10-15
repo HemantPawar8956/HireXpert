@@ -7,7 +7,9 @@ import Navbar from "./NavBar";
 import JobSearchBox from "./JobSearchBox";
 import useMobileView from "../../utilities/customHooks/useMobileView";
 import JobFeed from "./JobFeed";
+
 import JobCardsSection from "./JobCardSection";
+
 
 const FindDreamJob = () => {
   const isMobile = useMobileView();
