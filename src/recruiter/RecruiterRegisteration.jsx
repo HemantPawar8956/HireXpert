@@ -28,6 +28,7 @@ const RecruiterRegisteration = () => {
     const { value, name } = e.target;
     setRegisterationData({ ...registerationData, [name]: value });
   };
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -35,7 +36,7 @@ const RecruiterRegisteration = () => {
   return (
     <Box
       sx={{
-        Height: "100vh",
+        height: "100vh",
         backgroundColor: "#f5f6fa",
         justifyContent: "center",
         display: "flex",
@@ -49,7 +50,7 @@ const RecruiterRegisteration = () => {
           minWidth: "100%",
           minHeight: "100vh",
         }}>
-        {/* Left Section with Recruiter Image */}
+        {/* Left Section */}
         <Grid
           item
           xs={6}
@@ -64,9 +65,9 @@ const RecruiterRegisteration = () => {
             backgroundPosition: "center",
             color: "#fff",
             p: 5,
-            fontSize: "20px",
+            fontSize: "0.9rem", // decreased from ~1.1rem
+            minWidth: "600px",
           }}>
-          {/* Overlay */}
           <Box
             sx={{
               position: "absolute",
@@ -75,54 +76,88 @@ const RecruiterRegisteration = () => {
             }}
           />
 
-          {/* Content */}
           <Box sx={{ position: "relative", zIndex: 2 }}>
             <Box display="flex" alignItems="center" gap={1} mb={3}>
               <Avatar sx={{ bgcolor: "primary.main" }}>
-                <BusinessIcon />
+                <BusinessIcon fontSize="small" />
               </Avatar>
-              <Typography variant="h4" fontWeight="bold">
+              <Typography
+                variant="h5"
+                fontWeight="bold"
+                sx={{ fontSize: "1.4rem" }}>
                 HireXPERT
               </Typography>
             </Box>
 
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h6" gutterBottom sx={{ fontSize: "1.2rem" }}>
               Revolutionizing Recruitment with AI
             </Typography>
 
             <Box mt={3}>
-              <Typography variant="body1" gutterBottom>
+              <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ fontSize: "0.8rem" }}>
                 ✅ Reduce Hiring Time by <strong>60%</strong>
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ fontSize: "0.8rem" }}>
                 ✅ JD - Candidate Match Rate Improved by <strong>70%</strong>
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ fontSize: "0.8rem" }}>
                 ✅ Automate <strong>80%</strong> of Recruiter Workload
               </Typography>
             </Box>
 
             <Box mt={6}>
-              <Typography variant="h5" gutterBottom>
+              <Typography
+                variant="h6"
+                gutterBottom
+                sx={{ fontSize: "1rem", fontWeight: "bold" }}>
                 At a Glance
               </Typography>
+
               <Box display="flex" alignItems="center" gap={1}>
-                <WorkOutlineIcon />{" "}
-                <Typography>Open Jobs: Sales Manager</Typography>
+                <WorkOutlineIcon fontSize="small" />
+                <Typography sx={{ fontSize: "0.8rem" }}>
+                  Open Jobs: Sales Manager
+                </Typography>
               </Box>
               <Box display="flex" alignItems="center" gap={1}>
-                <GroupsIcon /> <Typography>Applications Received</Typography>
+                <GroupsIcon fontSize="small" />
+                <Typography sx={{ fontSize: "0.8rem" }}>
+                  Applications Received
+                </Typography>
               </Box>
               <Box display="flex" alignItems="center" gap={1}>
-                <GroupsIcon /> <Typography>Pending Interviews</Typography>
+                <GroupsIcon fontSize="small" />
+                <Typography sx={{ fontSize: "0.8rem" }}>
+                  Pending Interviews
+                </Typography>
               </Box>
               <Box display="flex" alignItems="center" gap={1}>
-                <GroupsIcon /> <Typography>Candidates Shortlisted</Typography>
+                <GroupsIcon fontSize="small" />
+                <Typography sx={{ fontSize: "0.8rem" }}>
+                  Candidates Shortlisted
+                </Typography>
               </Box>
               <Box display="flex" alignItems="center" gap={1}>
-                <GroupsIcon /> <Typography>Final Round Candidates</Typography>
+                <GroupsIcon fontSize="small" />
+                <Typography sx={{ fontSize: "0.8rem" }}>
+                  Final Round Candidates
+                </Typography>
               </Box>
-              <h4>Decode India's largest talent pool with the power of AI</h4>
+
+              <Typography
+                variant="subtitle2"
+                sx={{ mt: 2, fontSize: "0.9rem", fontWeight: "bold" }}>
+                Decode India's largest talent pool with the power of AI
+              </Typography>
             </Box>
           </Box>
         </Grid>
@@ -133,32 +168,48 @@ const RecruiterRegisteration = () => {
           xs={6}
           md={6}
           data-aos="fade-left"
-          maxHeight={"100%"}
           sx={{
-            p: { xs: 3, md: 3 },
+            p: { xs: 3, md: 5 },
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             backgroundColor: "#fff",
           }}>
           <Typography
-            variant="h4"
+            variant="h5"
             fontWeight="bold"
             gutterBottom
-            color="primary">
+            color="primary"
+            sx={{ fontSize: "1.4rem" }}>
             Get Started
           </Typography>
-          <Typography variant="h6" gutterBottom>
+
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            sx={{ fontSize: "0.8rem" }}>
             Sign up to hire the right candidates faster
           </Typography>
 
-          <Box component="form" mt={3}>
+          <Box component="form" mt={1}>
             <TextField
               fullWidth
               label="Company Name"
               margin="normal"
               variant="outlined"
               name="companyName"
+              sx={{
+                "& .MuiInputBase-input": {
+                  fontSize: "0.8rem", // smaller text
+                  padding: "14px 10px", // reduce padding → smaller height
+                },
+                "& .MuiInputLabel-root": {
+                  fontSize: "0.8rem", // smaller label
+                },
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "6px", // slightly compact corners
+                },
+              }}
             />
             <TextField
               fullWidth
@@ -166,6 +217,18 @@ const RecruiterRegisteration = () => {
               margin="normal"
               variant="outlined"
               name="compnyEmail"
+              sx={{
+                "& .MuiInputBase-input": {
+                  fontSize: "0.8rem", // smaller text
+                  padding: "14px 10px", // reduce padding → smaller height
+                },
+                "& .MuiInputLabel-root": {
+                  fontSize: "0.8rem", // smaller label
+                },
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "6px", // slightly compact corners
+                },
+              }}
             />
             <TextField
               fullWidth
@@ -173,6 +236,18 @@ const RecruiterRegisteration = () => {
               margin="normal"
               variant="outlined"
               name="website"
+              sx={{
+                "& .MuiInputBase-input": {
+                  fontSize: "0.8rem", // smaller text
+                  padding: "14px 10px", // reduce padding → smaller height
+                },
+                "& .MuiInputLabel-root": {
+                  fontSize: "0.8rem", // smaller label
+                },
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "6px", // slightly compact corners
+                },
+              }}
             />
             <TextField
               fullWidth
@@ -181,14 +256,34 @@ const RecruiterRegisteration = () => {
               margin="normal"
               variant="outlined"
               InputLabelProps={{
-                shrink: true, // 👈 keeps the label always visible
+                shrink: true,
+              }}
+              sx={{
+                "& .MuiInputBase-input": {
+                  fontSize: "0.8rem", // smaller text
+                  padding: "14px 10px", // reduce padding → smaller height
+                },
+                "& .MuiInputLabel-root": {
+                  fontSize: "0.8rem", // smaller label
+                },
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "6px", // slightly compact corners
+                },
               }}
             />
 
-            <Typography variant="subtitle2" mt={3} gutterBottom>
+            <Typography
+              variant="subtitle2"
+              mt={3}
+              gutterBottom
+              sx={{ fontSize: "0.8rem" }}>
               Number of Employees
             </Typography>
-            <RadioGroup row defaultValue="1-50">
+
+            <RadioGroup
+              row
+              defaultValue="1-50"
+              sx={{ "& .MuiFormControlLabel-label": { fontSize: "0.8rem" } }}>
               <FormControlLabel value="1-50" control={<Radio />} label="1-50" />
               <FormControlLabel
                 value="50-100"
@@ -208,10 +303,10 @@ const RecruiterRegisteration = () => {
               color="primary"
               fullWidth
               sx={{
-                mt: 4,
-                py: 1.5,
+                mt: 3,
+                py: 1.3,
                 borderRadius: 2,
-                fontSize: "1rem",
+                fontSize: "0.9rem",
                 textTransform: "none",
               }}>
               Create Account

@@ -15,38 +15,38 @@ const JobSearchBox = () => {
       sx={{
         display: "flex",
         justifyContent: "center",
-        mt: 4,
-        px: 2,
+        mt: 3,
+        px: 1.5,
       }}>
       <Paper
         elevation={2}
         data-aos="zoom-in"
         sx={{
-          borderRadius: "16px",
+          borderRadius: "12px",
           backgroundColor: "#fff",
           width: "100%",
-          maxWidth: 600,
-          px: 2,
-          py: 1, // ⬅️ Reduce vertical padding on outer container
+          maxWidth: 550,
+          px: 1.5,
+          py: 0.6, // slightly reduced vertical padding
         }}>
-        <Grid gap={2}>
+        <Grid gap={1.5}>
           <Grid>
             <OutlinedInput
               fullWidth
               placeholder="Job Title, keywords or company"
               startAdornment={
                 <InputAdornment position="start">
-                  <SearchIcon sx={{ color: "#555", fontSize: 16 }} />
+                  <SearchIcon sx={{ color: "#555", fontSize: 14 }} />
                 </InputAdornment>
               }
               sx={{
-                fontSize: "16px",
+                fontSize: "14px",
                 border: "none",
                 borderBottom: "1px solid #ddd",
                 borderRadius: 0,
-                paddingY: "4px", // ⬅️ Reduce vertical padding on outer container
+                paddingY: "2px",
                 "& input": {
-                  padding: "4px 0", // ⬅️ Reduce internal input padding (top/bottom)
+                  padding: "3px 0",
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   border: "none",
@@ -67,18 +67,18 @@ const JobSearchBox = () => {
               placeholder="Location"
               startAdornment={
                 <InputAdornment position="start">
-                  <LocationOnIcon sx={{ color: "#555", fontSize: 16 }} />
+                  <LocationOnIcon sx={{ color: "#555", fontSize: 14 }} />
                 </InputAdornment>
               }
               sx={{
-                fontSize: "16px",
+                fontSize: "14px",
                 borderRadius: 0,
-                paddingY: "4px",
+                paddingY: "2px",
                 "& input": {
-                  padding: "4px 0", // reduce vertical input padding
+                  padding: "3px 0",
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
-                  border: "none", // remove the border entirely
+                  border: "none",
                 },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
                   border: "none",

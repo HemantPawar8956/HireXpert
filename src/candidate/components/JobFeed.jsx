@@ -25,22 +25,35 @@ import {
   FaClock,
 } from "react-icons/fa";
 import JobCard from "./JobCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchJobs, fetchJobsByReferences } from "../../redux/Api/jobApis";
 
-const jobData = Array(8).fill({
-  title: "Design Head–UI/UX",
-  company: "Hire XPERT",
-  rating: "3.5",
-  location: "Gurgaon",
-  experience: "4 – 6 Years",
-  salary: "5–6 Lacs PA",
-  posted: "4 days ago",
-  logo: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-});
+// const jobData = Array(8).fill({
+//   title: "Design Head–UI/UX",
+//   company: "Hire XPERT",
+//   rating: "3.5",
+//   location: "Gurgaon",
+//   experience: "4 – 6 Years",
+//   salary: "5–6 Lacs PA",
+//   posted: "4 days ago",
+//   logo: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+// });
 
 const JobFeed = () => {
+  const dispatch = useDispatch();
+  const jobSlice = useSelector((state) => state?.jobSlice);
+  console.log("jobSLice", jobSlice);
+  const jobPreferences =
+    useSelector((state) => state?.userSlice?.userPreferences?.searchHistory) ||
+    null;
+  console.log("jobsByReferences", jobSlice?.jobsByReferences);
+
   useEffect(() => {
+    jobPreferences
+      ? dispatch(fetchJobsByReferences(jobPreferences))
+      : dispatch(fetchJobs());
     AOS.init({ duration: 1000 });
-  }, []);
+  }, [jobPreferences]);
 
   return (
     <Box
@@ -71,30 +84,38 @@ const JobFeed = () => {
             md: 1, // Desktop
           },
         }}>
-        <Typography variant="h5" fontWeight="bold" gutterBottom>
+        <Typography variant="h6" fontWeight="bold" gutterBottom>
           My Job Feed
         </Typography>
         <Stack direction={{ xs: "row", md: "row" }} spacing={1}>
-          <FormControl size="small" sx={{ minWidth: 100 }}>
-            <Select defaultValue="" displayEmpty>
+          <FormControl size="small" sx={{ minWidth: 80 }}>
+            <Select defaultValue="" displayEmpty sx={{ fontSize: "0.7rem" }}>
               <MenuItem value="">Date Posted</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl size="small" sx={{ minWidth: 100 }}>
-            <Select defaultValue="" displayEmpty>
-              <MenuItem value="" disabled>
+            <Select defaultValue="" displayEmpty sx={{ fontSize: "0.7rem" }}>
+              <MenuItem value="" disabled sx={{ fontSize: "0.7rem" }}>
                 Experience
               </MenuItem>
-              <MenuItem value="0-1">0 – 1 Year</MenuItem>
-              <MenuItem value="1-3">1 – 3 Years</MenuItem>
-              <MenuItem value="3-5">3 – 5 Years</MenuItem>
-              <MenuItem value="5+">5+ Years</MenuItem>
+              <MenuItem value="0-1" sx={{ fontSize: "0.7rem" }}>
+                0 – 1 Year
+              </MenuItem>
+              <MenuItem value="1-3" sx={{ fontSize: "0.7rem" }}>
+                1 – 3 Years
+              </MenuItem>
+              <MenuItem value="3-5" sx={{ fontSize: "0.7rem" }}>
+                3 – 5 Years
+              </MenuItem>
+              <MenuItem value="5+" sx={{ fontSize: "0.7rem" }}>
+                5+ Years
+              </MenuItem>
             </Select>
           </FormControl>
 
           <FormControl size="small" sx={{ minWidth: 100 }}>
-            <Select defaultValue="" displayEmpty>
+            <Select defaultValue="" displayEmpty sx={{ fontSize: "0.7rem" }}>
               <MenuItem value="">Work Type</MenuItem>
             </Select>
           </FormControl>
@@ -103,7 +124,7 @@ const JobFeed = () => {
 
       {/* Job Cards */}
       <Grid container spacing={3} justifyContent="center">
-        {jobData.map((job, index) => (
+        {(jobSlice?.jobsByReferences || jobSlice?.jobs)?.map((job, index) => (
           <Grid
             item
             key={index}
