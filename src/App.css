@@ -1,12 +1,17 @@
 * {
   font-family: sans-serif;
 }
+
 :root {
   --background-color: linear-gradient(to right, #ebebf7, #f4f5f8, #ebebf7);
   --primary-button: #5c45e3;
   --primary-button-hover: #432dc5;
 }
 .layout {
-  height: 100vh;
+  /* height: 100vh; */
   width: 100%;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+

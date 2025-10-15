@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Box,
@@ -12,24 +12,47 @@ import {
   ListItem,
   ListItemText,
   Divider,
-  useMediaQuery,
-  useTheme,
+  Avatar,
+  Menu,
+  Grow,
+  MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { motion } from "framer-motion";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import useMobileView from "../../utilities/customHooks/useMobileView";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getLoginData,
   setModalOpen,
+  logout,
   setRegisterModalOpen,
 } from "../../redux/slices/userSlice";
+import { setJobsByReferences } from "../../redux/slices/jobSlice";
 
-const Navbar = () => {
+const NavBar = () => {
   const isMobile = useMobileView();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const userSlice = useSelector((state) => state.userSlice);
+  const { userData } = useSelector((state) => state?.userSlice);
+  // Dropdown Menu State
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLogout = () => {
+    // Example logout action
+    dispatch(logout());
+    dispatch(setJobsByReferences(null));
+    handleClose();
+  };
 
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -47,16 +70,18 @@ const Navbar = () => {
 
   const navLinks = ["Home", "Jobs", "Manage Job Postings", "Screen Resumes"];
 
+  useEffect(() => {
+    dispatch(getLoginData());
+  }, []);
   return (
     <>
-      <AppBar
-        position="sticky"
-        elevation={0}
+      <Box
         sx={{
-          background: "#eaf7f1",
+          position: "sticky",
           top: 0,
-          left: 0,
-          right: 0,
+          zIndex: 1200,
+          background: "#eaf7f1",
+          // boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
         }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           {/* Logo */}
@@ -69,8 +94,8 @@ const Navbar = () => {
             onClick={handleLogoClick}>
             <Box
               sx={{
-                width: 12,
-                height: 12,
+                width: 10,
+                height: 10,
                 background: "var(--primary-button)",
                 borderRadius: "50%",
               }}
@@ -79,7 +104,7 @@ const Navbar = () => {
               variant="h6"
               fontWeight="bold"
               color="black"
-              sx={{ fontSize: "1.7rem" }}>
+              sx={{ fontSize: "1.4rem", lineHeight: 1.2 }}>
               Hire<span style={{ fontWeight: "normal" }}>XPERT</span>
             </Typography>
           </Box>
@@ -90,7 +115,7 @@ const Navbar = () => {
               edge="end"
               color="inherit"
               onClick={() => setDrawerOpen(true)}>
-              <MenuIcon sx={{ fontSize: "2rem", color: "#004d4d" }} />
+              <MenuIcon sx={{ fontSize: "1.5rem", color: "#004d4d" }} />
             </IconButton>
           ) : (
             // Desktop View
@@ -103,7 +128,7 @@ const Navbar = () => {
                     sx={{
                       cursor: "pointer",
                       fontWeight: 500,
-                      fontSize: "1.2rem",
+                      fontSize: "0.95rem",
                       padding: "0.3rem 0.7rem",
                       borderBottom: "2px solid transparent",
                       "&:hover": {
@@ -117,49 +142,152 @@ const Navbar = () => {
                 ))}
               </Stack>
 
-              {/* Action Buttons */}
-              <Box display="flex" gap={2}>
-                <Button
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "7px",
-                    textTransform: "none",
-                    fontWeight: 500,
-                    color: "black",
-                    fontSize: "1rem",
-                    borderColor: "#ccc",
-                    backgroundColor: "white",
-                    "&:hover": {
-                      backgroundColor: "#f0f0f0",
-                    },
-                  }}
-                  onClick={() => {
-                    dispatch(setModalOpen(true)); // Dispatch action to open modal
-                  }}>
-                  Log In
-                </Button>
-                <Button
-                  variant="contained"
-                  sx={{
-                    borderRadius: "7px",
-                    textTransform: "none",
-                    fontWeight: 500,
-                    fontSize: "1rem",
-                    backgroundColor: "#004d4d",
-                    "&:hover": {
-                      backgroundColor: "#003333",
-                    },
-                  }}
-                  onClick={() => {
-                    dispatch(setRegisterModalOpen(true)); // Dispatch action to open modal
-                  }}>
-                  Register
-                </Button>
+              {/* Action Buttons OR User Menu */}
+              <Box display="flex" gap={0.5} alignItems="center">
+                {userData ? (
+                  <>
+                    {/* Avatar with animation */}
+                    <motion.div whileHover={{ scale: 0.8 }} sx={{ scale: 0.9 }}>
+                      <Avatar
+                        sx={{
+                          bgcolor: "#004d4d",
+                          fontWeight: "bold",
+                          fontSize: "0.9rem",
+                          padding: "8px",
+                        }}>
+                        {userData.email.slice(0, 1).toUpperCase()}
+                      </Avatar>
+                    </motion.div>
+
+                    {/* Username + Dropdown */}
+                    <Typography
+                      onClick={handleMenuClick}
+                      sx={{
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        fontWeight: 600,
+                        fontSize: "0.8rem",
+                        color: "#004d4d",
+                        "&:hover": {
+                          color: "#008080",
+                        },
+                        transition: "all 0.3s ease",
+                      }}>
+                      {userData?.name.toUpperCase()}
+                      <ArrowDropDownIcon />
+                    </Typography>
+
+                    {/* Dropdown Menu */}
+                    <Menu
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      slotProps={{
+                        paper: {
+                          elevation: 3,
+                          sx: {
+                            mt: 1.2,
+                            borderRadius: "7px",
+                            minWidth: 200,
+                            py: 1,
+                            background: "#f0fdfa",
+                            boxShadow:
+                              "0px 6px 20px rgba(0, 0, 0, 0.1), 0px 8px 24px rgba(0, 0, 0, 0.15)",
+                          },
+                        },
+                        transition: {
+                          // instead of TransitionProps
+                          component: Grow,
+                          timeout: 300,
+                        },
+                      }}>
+                      <MenuItem
+                        onClick={handleClose}
+                        sx={{
+                          backgroundColor: "transparent !important",
+                          fontSize: "0.9rem",
+                          "&:hover": {
+                            backgroundColor: "#b5f0f0ff !important",
+                            borderRadius: "3px",
+                            color: "#004d4d",
+                          },
+                          transition: "all 0.45s ease",
+                        }}>
+                        Profile
+                      </MenuItem>
+                      <MenuItem
+                        onClick={handleClose}
+                        sx={{
+                          backgroundColor: "transparent !important",
+                          fontSize: "0.9rem",
+                          "&:hover": {
+                            backgroundColor: "#b5f0f0ff !important",
+                            borderRadius: "3px",
+                            color: "#004d4d",
+                          },
+                          transition: "all 0.25s ease",
+                        }}>
+                        Settings
+                      </MenuItem>
+                      <Divider sx={{ my: 0.5 }} />
+                      <MenuItem
+                        onClick={handleLogout}
+                        sx={{
+                          color: "red",
+                          fontWeight: 500,
+                          fontSize: "0.9rem",
+                          "&:hover": {
+                            backgroundColor: "#ffe6e6",
+                            borderRadius: "3px",
+                          },
+                          transition: "all 0.25s ease",
+                        }}>
+                        Logout
+                      </MenuItem>
+                    </Menu>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        borderRadius: "7px",
+                        textTransform: "none",
+                        fontWeight: 500,
+                        color: "black",
+                        fontSize: "0.8rem",
+                        borderColor: "#ccc",
+                        backgroundColor: "white",
+                        "&:hover": {
+                          backgroundColor: "#f0f0f0",
+                        },
+                      }}
+                      onClick={() => dispatch(setModalOpen(true))}>
+                      Log In
+                    </Button>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        borderRadius: "7px",
+                        textTransform: "none",
+                        fontWeight: 500,
+                        fontSize: "0.8rem",
+                        backgroundColor: "#004d4d",
+                        "&:hover": {
+                          backgroundColor: "#003333",
+                        },
+                      }}
+                      onClick={() => dispatch(setRegisterModalOpen(true))}>
+                      Register
+                    </Button>
+                  </>
+                )}
               </Box>
             </>
           )}
         </Toolbar>
-      </AppBar>
+      </Box>
 
       {/* Sidebar Drawer */}
       <Drawer
@@ -179,6 +307,23 @@ const Navbar = () => {
             </IconButton>
           </Box>
           <Divider sx={{ my: 2 }} />
+          {userData && (
+            <Box mb={2} textAlign="center">
+              <Avatar
+                sx={{
+                  bgcolor: "#004d4d",
+                  fontWeight: "bold",
+                  width: 56,
+                  height: 56,
+                  margin: "0 auto",
+                }}>
+                {userData.email.slice(0, 1).toUpperCase()}
+              </Avatar>
+              <Typography variant="subtitle1" mt={1} fontWeight="600">
+                {userData.email}
+              </Typography>
+            </Box>
+          )}
           <List>
             {navLinks.map((text) => (
               <ListItem key={text} onClick={() => handleNavigation(text)}>
@@ -187,24 +332,42 @@ const Navbar = () => {
             ))}
           </List>
           <Box mt={3}>
-            <Button
-              fullWidth
-              variant="outlined"
-              sx={{ mb: 1, textTransform: "none" }}
-              onClick={() => {
-                dispatch(setModalOpen(true)); // Dispatch action to open modal
-              }}>
-              Log In
-            </Button>
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ textTransform: "none", backgroundColor: "#004d4d" }}
-              onClick={() => {
-                dispatch(setRegisterModalOpen(true)); // Dispatch action to open modal
-              }}>
-              Register
-            </Button>
+            {userData ? (
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={handleLogout}
+                sx={{
+                  color: "red",
+                  fontWeight: 500,
+                  backgroundColor: "#f79d9dff",
+                  "&:hover": {
+                    backgroundColor: "#f34b4bff",
+                    borderRadius: "3px",
+                    color: "white",
+                  },
+                  transition: "all 0.25s ease",
+                }}>
+                LogOut
+              </Button>
+            ) : (
+              <>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  sx={{ mb: 1, textTransform: "none" }}
+                  onClick={() => dispatch(setModalOpen(true))}>
+                  Log In
+                </Button>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{ textTransform: "none", backgroundColor: "#004d4d" }}
+                  onClick={() => dispatch(setRegisterModalOpen(true))}>
+                  Register
+                </Button>
+              </>
+            )}
           </Box>
         </Box>
       </Drawer>
@@ -212,4 +375,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;
