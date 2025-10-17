@@ -7,7 +7,7 @@ export const fetchJobs = createAsyncThunk(
   "jobs/fetchJobs",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://localhost:8000/api/jobs/");
+      const response = await axios.get("https://hire-xpert-backend.vercel.app/api/jobs/");
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -21,7 +21,7 @@ export const fetchJobsByReferences = createAsyncThunk(
   async (references, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/jobs/getJobsByReferences",
+        "https://hire-xpert-backend.vercel.app/api/jobs/getJobsByReferences",
         { references }
       );
       console.log("response", response);
@@ -39,7 +39,7 @@ export const fetchJobById = createAsyncThunk(
   async (jobId, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/jobs/getJob/${jobId}`
+        `https://hire-xpert-backend.vercel.app/api/jobs/getJob/${jobId}`
       );
       return response.data;
     } catch (error) {
@@ -54,7 +54,7 @@ export const applyForJob = createAsyncThunk(
   async ({ jobId, applicationData }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/jobs/apply/${jobId}`,
+        `https://hire-xpert-backend.vercel.app/api/jobs/apply/${jobId}`,
         applicationData,
         { withCredentials: true }
       );
@@ -71,7 +71,7 @@ export const saveJob = createAsyncThunk(
   async (jobId, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/jobs/save/${jobId}`,
+        `https://hire-xpert-backend.vercel.app/api/jobs/save/${jobId}`,
         {},
         { withCredentials: true }
       );
@@ -88,7 +88,7 @@ export const unsaveJob = createAsyncThunk(
   async (jobId, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/jobs/unsave/${jobId}`,
+        `https://hire-xpert-backend.vercel.app/api/jobs/unsave/${jobId}`,
         {},
         { withCredentials: true }
       );

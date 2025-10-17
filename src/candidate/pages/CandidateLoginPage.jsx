@@ -206,8 +206,10 @@ const CandidateLogin = () => {
           {/* Divider */}
           <Divider sx={{ my: 2 }}>or</Divider>
 
-          {/* Google Sign-In */}
-          <GoogleAuth />
+          <Box sx={{ margin: "0 auto" }}>
+            {/* Google Sign-In */}
+            <GoogleAuth />
+          </Box>
 
           {/* Register Link */}
           <Typography
