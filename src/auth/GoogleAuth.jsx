@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 const GoogleAuth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const clientId = import.meta.env.VITE_Google_Client_Id;
+  const clientId = import.meta.env.VITE_Google_Client_ID;
+  console.log(clientId);
   const handleSuccess = async (credentialResponse) => {
     const token = credentialResponse.credential; // Google’s ID token
     const decoded = jwtDecode(token); // Decode to get user info (email, name, picture)
@@ -25,9 +26,12 @@ const GoogleAuth = () => {
         setTimeout(() => {
           navigate(-1);
         }, 1200);
+      } else {
+        toast.error(res.payload);
       }
     } catch (err) {
-      console.error("Google login error:", err);
+      console.log(err);
+      toast.error("Google login error");
     }
   };
 
