@@ -36,7 +36,6 @@ const CandidateLogin = () => {
     try {
       dispatch(setLoading(true));
       const response = await dispatch(loginUser(loginData)).unwrap();
-      console.log(response, "response");
 
       if (response.token) {
         toast.success(response.message || "Login successful!");

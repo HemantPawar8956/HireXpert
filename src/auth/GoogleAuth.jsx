@@ -17,7 +17,6 @@ const GoogleAuth = () => {
 
     try {
       const res = await dispatch(gooleLoginUser(token)); // Your backend API call
-      console.log("Server response:", res);
       if (res.payload?.jwtToken) {
         localStorage.setItem("token", res.payload?.jwtToken);
         toast.success(

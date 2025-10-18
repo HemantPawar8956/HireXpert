@@ -42,11 +42,9 @@ import { fetchJobs, fetchJobsByReferences } from "../../redux/Api/jobApis";
 const JobFeed = () => {
   const dispatch = useDispatch();
   const jobSlice = useSelector((state) => state?.jobSlice);
-  console.log("jobSLice", jobSlice);
   const jobPreferences =
     useSelector((state) => state?.userSlice?.userPreferences?.searchHistory) ||
     null;
-  console.log("jobsByReferences", jobSlice?.jobsByReferences);
 
   useEffect(() => {
     jobPreferences

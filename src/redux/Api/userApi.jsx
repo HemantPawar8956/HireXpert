@@ -26,11 +26,10 @@ export const gooleLoginUser = createAsyncThunk(
   async (token, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/users/googleLogin",
+        "https://hire-xpert-backend.vercel.app/api/users/googleLogin",
         { token }, // send the ID token to backend
         { withCredentials: true }
       );
-      console.log(response, "response from google");
       return response.data;
     } catch (error) {
       return rejectWithValue(
