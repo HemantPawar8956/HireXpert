@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const GoogleAuth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const clientId = import.meta.env.VITE_Google_Client_ID;
+  const clientId = import.meta.env.VITE_Google_Client_Id;
   const handleSuccess = async (credentialResponse) => {
     const token = credentialResponse.credential; // Google’s ID token
     const decoded = jwtDecode(token); // Decode to get user info (email, name, picture)
